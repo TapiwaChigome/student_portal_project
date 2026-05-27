@@ -1,17 +1,628 @@
-<!DOCTYPE html>
-
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-
-    <title>Student Portal</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NUST Student Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="NUST student portal dashboard mockup">
 </head>
-
 <body>
+  <section id="loginView" class="login-screen">
+    <header class="login-banner">
+      <img class="login-banner-logo" src="logo_nust_png.png" alt="NUST crest">
+      <div class="login-banner-title">NATIONAL UNIVERSITY OF SCIENCE AND TECHNOLOGY</div>
+    </header>
 
-    <h1>Student Portal is Working</h1>
+    <main class="hero">
+      <div class="split left-panel">
+        <img class="logo-blur" src="logo_nust_png.png" alt="NUST crest">
+      </div>
+      <div class="split right-panel"></div>
 
+      <div class="login-card">
+        <h2>STUDENTS PORTAL</h2>
+        <form id="loginForm" onsubmit="handleSubmit(event)">
+          <label class="sr-only" for="student">Student Number</label>
+          <input id="student" name="student" placeholder="Student Number" autocomplete="username" />
+
+          <label class="sr-only" for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" />
+
+          <button class="btn-primary" type="submit">LOG IN</button>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <section id="dashboardView" class="dashboard-view is-hidden">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="menuToggle" class="icon-button" type="button" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="topbar-title">NUST STUDENT PORTAL</div>
+      </div>
+      <div class="topbar-right">
+        <button class="mail-button" type="button" aria-label="Messages">
+          <span class="mail-symbol" aria-hidden="true"></span>
+          <span class="badge">0</span>
+        </button>
+        <button class="logout-button" type="button" onclick="showLogin()">Logout</button>
+      </div>
+    </header>
+
+    <div class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="profile-card">
+          <img src="logo_nust_png.png" alt="NUST crest" class="profile-logo" />
+          <div class="profile-name">Keith Mutabvuri</div>
+        </div>
+
+        <nav class="side-nav" aria-label="Student navigation">
+          <a class="side-link active" href="#dashboard">My Portal Dashboard</a>
+          <a class="side-link" href="#registration">New Registration</a>
+          <a class="side-link" href="#payments">Payments History</a>
+          <a class="side-link" href="#results">Examinations Results</a>
+          <a class="side-link" href="#assessment">Continuous Assessment</a>
+          <a class="side-link" href="#timetable">Exams Timetable</a>
+          <a class="side-link" href="#elearning">NUST E-Learning</a>
+          <a class="side-link" href="#website">Main Website</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard" id="dashboard">
+        <div id="dashboardHome">
+        <section class="quick-actions">
+          <article class="action-card green">
+            <div class="action-icon icon-quote" aria-hidden="true"></div>
+            <h2>GET FEES QUOTE</h2>
+            <p>Get your fees invoice.</p>
+          </article>
+          <article class="action-card blue">
+            <div class="action-icon icon-pay" aria-hidden="true"></div>
+            <h2>PAY TUITION FEES</h2>
+            <p>Pay instantly with Ecocash.</p>
+          </article>
+          <article class="action-card red">
+            <div class="action-icon icon-online" aria-hidden="true"></div>
+            <h2>PAY ONLINE</h2>
+            <p>Secure Payments With FBC</p>
+          </article>
+          <article class="action-card orange">
+            <div class="action-icon icon-enquiry" aria-hidden="true"></div>
+            <h2>ENQUIRIES</h2>
+            <p>We are here to serve you</p>
+          </article>
+          <article class="action-card teal">
+            <div class="action-icon icon-calendar" aria-hidden="true"></div>
+            <h2>NUST CALENDAR APP</h2>
+            <p>Download Android APK</p>
+          </article>
+        </section>
+
+        <section class="notice-banner">
+          <strong>ARE YOU A REGISTERED STUDENT?</strong> TO START THE REGISTRATION PROCESS PLEASE CLICK HERE.
+        </section>
+
+        <section class="content-grid">
+          <article class="panel personal-panel">
+            <div class="panel-header">PERSONAL DETAILS</div>
+            <div class="personal-body">
+              <img src="logo_nust_png.png" alt="Student crest" class="detail-logo" />
+              <div class="personal-copy">
+                <h3>Keith Tawananyasha Mutabvuri</h3>
+                <p class="id-line">ID Number: 58-2029825N66</p>
+                <p>Victoria Range</p>
+                <p>Masvingo</p>
+                <p>Zimbabwe</p>
+                <p>Phone Number: 263772817794</p>
+                <p>Gender: Male</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel courses-panel">
+            <div class="panel-header">CURRENTLY REGISTERED COURSES</div>
+            <table class="course-table">
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Name</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>SCS2104</td><td>Structured Systems Analysis and Design</td><td>CORE</td></tr>
+                <tr><td>SCS2108</td><td>Object Oriented Software Concepts and Development</td><td>CORE</td></tr>
+                <tr><td>SCS2110</td><td>Research Methods</td><td>CORE</td></tr>
+                <tr><td>SCS2111</td><td>Data Communications and Computer Networks</td><td>CORE</td></tr>
+                <tr><td>SCS2114</td><td>Web Development</td><td>CORE</td></tr>
+                <tr><td>SCS2110</td><td>Introduction to Applied Statistics</td><td>CORE</td></tr>
+              </tbody>
+            </table>
+            <div class="info-callout success">It is the responsibility of the student to make sure that the courses above are correct.</div>
+          </article>
+
+          <article class="panel academic-panel">
+            <div class="panel-header">ACADEMIC DETAILS</div>
+            <table class="detail-table">
+              <tr><td>Student Number:</td><td>N02530153A</td></tr>
+              <tr><td>Programme:</td><td>SCS</td></tr>
+              <tr><td>Registration Status:</td><td class="warn">REGISTERED</td></tr>
+              <tr><td>CERTIFICATE AND TRANSCRIPT CLEARED:</td><td>No</td></tr>
+              <tr><td>Current Academic Year:</td><td>2026</td></tr>
+              <tr><td>Current Part:</td><td>2</td></tr>
+              <tr><td>Current Semester:</td><td>1</td></tr>
+            </table>
+          </article>
+
+          <article class="panel financial-panel">
+            <div class="panel-header">FINANCIAL DETAILS</div>
+            <table class="detail-table">
+              <tr><td>Overall Fees Balance:</td><td>349.73</td></tr>
+              <tr><td>Payment Plan:</td><td>You are not on Payment Plan!</td></tr>
+              <tr><td>Library Fines:</td><td></td></tr>
+              <tr><td>Items Owed At The Library:</td><td></td></tr>
+            </table>
+            <div class="info-callout danger">Students are advised to clear their fees before the start of exams.</div>
+          </article>
+        </section>
+
+        <section class="utility-strip">
+          <div class="utility-card"><span>Students Webmail</span></div>
+          <div class="utility-card"><span>Google Classroom</span></div>
+          <div class="utility-card"><span>E-Resources</span></div>
+        </section>
+
+        <section class="info-grid">
+          <article class="mini-panel">
+            <div class="mini-header dark">Point Of Sale Service</div>
+            <p>NUST is now accepting fees payments by swiping via the Point of Sale platform at the Bursar Banking Hall and Harare Office. Bank cards that are accepted are all local ZimSwitch cards, all MasterCards and Visa cards. Students can also pay online via Ecocash, Telecash, Visa or Mastercard.</p>
+          </article>
+
+          <article class="mini-panel">
+            <div class="mini-header pink">Reminder On Registration</div>
+            <p>Please note that students who are not registered will not be allowed to access University facilities. Therefore, students are urged to regularise their registration status to avoid inconveniences.</p>
+          </article>
+
+          <article class="mini-panel">
+            <div class="mini-header green">How To Register</div>
+            <ol>
+              <li>Open the NUST website http://www.nust.ac.zw</li>
+              <li>Click on Student Portal</li>
+              <li>Enter your login credentials</li>
+              <li>After logging on, click on New Registration</li>
+              <li>Verify the Semester and Courses and click submit</li>
+            </ol>
+          </article>
+
+          <article class="mini-panel">
+            <div class="mini-header blue">USSD Payment</div>
+            <p>Good News! For your added convenience, you can now pay your NUST fees using USSD code, *151*2*3*9*2#</p>
+          </article>
+        </section>
+
+        </div>
+
+        <section id="payments" class="panel payments-panel is-hidden">
+          <div class="panel-header">Payment History</div>
+          <div class="payments-body">
+            <div class="account-banner">ACCOUNT INFORMATION:</div>
+            <div class="balance-line">Overall Balance: <strong>USD 349.73</strong></div>
+
+            <div class="ledger-section">
+              <h4>ZIG ENTRIES</h4>
+              <table class="payments-table enhance-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Currency Code</th>
+                    <th>Amount</th>
+                    <th>USD Equivalent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>2026-04-25</td><td>PAYMENT</td><td>Tuition Fees</td><td>ZIG</td><td>-7200</td><td>-285.51</td></tr>
+                  <tr><td>2026-01-22</td><td>PAYMENT</td><td>Tuition Fees</td><td>ZIG</td><td>-2700</td><td>-105.51</td></tr>
+                  <tr><td>2025-12-31</td><td>PAYMENT</td><td>Debtors Rev Loss on Exchange Rate</td><td>ZIG</td><td>-51.77</td><td>0.0</td></tr>
+                  <tr><td>2025-12-24</td><td>PAYMENT</td><td>Tuition Fees</td><td>ZIG</td><td>-6920</td><td>-265.15</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ledger-section">
+              <h4>USD ENTRIES</h4>
+              <table class="payments-table enhance-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Currency Code</th>
+                    <th>Amount</th>
+                    <th>USD Equivalent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>2026-04-26</td><td>INVOICE</td><td>UG-P2SP1-SCS-2025-BYO-1-Y2-S1</td><td>USD</td><td>745</td><td>745</td></tr>
+                  <tr><td>2025-11-06</td><td>INVOICE</td><td>UG-P2SP1-SCS-2025-BYO-1-Y1-S2</td><td>USD</td><td>745</td><td>745</td></tr>
+                  <tr><td>2025-10-23</td><td>PAYMENT</td><td>Fees</td><td>USD</td><td>-271.56</td><td>-271.56</td></tr>
+                  <tr><td>2025-03-25</td><td>INVOICE</td><td>UG-P2SP1-SCS-2025-BYO-1-Y1-S1</td><td>USD</td><td>745</td><td>745</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="historic-callout">HAVE HISTORICAL PAYMENTS? <a href="#">CLICK HERE TO VIEW.</a></div>
+
+            <div class="export-wrap">
+              <button class="export-btn" data-target="#payments">Export as PDF</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results" class="panel results-panel is-hidden">
+          <div class="panel-header">Examination Results</div>
+          <div class="results-profile panel">
+            <div class="results-profile-body">
+              <div class="profile-col details">
+                <table class="result-details">
+                  <tr><td><strong>Surname:</strong></td><td>Mutabvuri</td></tr>
+                  <tr><td><strong>Name(s):</strong></td><td>Keith Tawananyasha</td></tr>
+                  <tr><td><strong>Gender:</strong></td><td>Male</td></tr>
+                  <tr><td><strong>National ID#:</strong></td><td>58-2029825N66</td></tr>
+                  <tr><td><strong>Date Of Birth:</strong></td><td>2006-1-9</td></tr>
+                  <tr><td><strong>Place Of Birth</strong>:</td><td>Kwekwe</td></tr>
+                  <tr><td><strong>Programme</strong>:</td><td>Bachelor of Science Honours Degree in Computer Science</td></tr>
+                </table>
+              </div>
+
+              <div class="profile-col address">
+                <div class="address-title">Address and Contact Details</div>
+                <div>Victoria Range</div>
+                <div>Masvingo</div>
+                <div>Zimbabwe</div>
+                <div style="margin-top:8px"><strong>Telephone</strong> :263772817794</div>
+              </div>
+
+              <div class="profile-col idcrest">
+                <div class="student-id">N02530153A</div>
+                <img src="logo_nust_png.png" alt="Student crest" class="detail-logo" />
+              </div>
+            </div>
+          </div>
+          <div class="results-body">
+            <div class="results-title">Examination Results</div>
+            <p class="results-sub">Please Ignore Duplicate Results.</p>
+
+            <div class="note-box">NOTE: One (1) credit denotes approximately ten (10) notional study hours of the average student's academic workload (spent in class, out-of-class, and in taking appropriate examinations)</div>
+
+            <div class="results-table-wrap">
+              <table class="results-table enhance-table">
+                <thead>
+                  <tr>
+                    <th>Academic Year</th>
+                    <th>Part</th>
+                    <th>Semester</th>
+                    <th>Entry Type</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Mark</th>
+                    <th>Classification</th>
+                    <th>Earned Credits</th>
+                    <th>Remark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SMA1101</td><td>Calculus</td><td>55.00</td><td>P</td><td>12</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SHP1105</td><td>Electricity and Magnetism</td><td>65.00</td><td>2.1</td><td>12</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SCS1112</td><td>Fundamentals of Digital Electronics</td><td>75.00</td><td>1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SCS1101</td><td>Introduction to Computer Science and Programming</td><td>68.00</td><td>2.1</td><td>12</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SMA1102</td><td>Linear Algebra</td><td>72.00</td><td>2.1</td><td>12</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>1</td><td>COURSE</td><td>SCS1103</td><td>Operating Systems Concepts</td><td>62.00</td><td>2.2</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1216</td><td>Computer Architecture and Organisation</td><td>82.00</td><td>1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1217</td><td>Data Structures and Algorithms</td><td>70.00</td><td>2.1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1213</td><td>Database Systems</td><td>76.00</td><td>1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1210</td><td>Discrete Mathematics</td><td>81.00</td><td>1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1215</td><td>Ethics and Professionalism</td><td>80.00</td><td>1</td><td>10</td><td>Pass</td></tr>
+                  <tr><td>2025</td><td>1</td><td>2</td><td>COURSE</td><td>SCS1214</td><td>Software Engineering</td><td>69.00</td><td>2.1</td><td>10</td><td>Pass</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="export-wrap"><button class="export-btn" data-target="#results">Export as PDF</button></div>
+          </div>
+        </section>
+
+        <section id="assessment" class="panel assessment-panel is-hidden">
+          <div class="panel-header">Continuous Assessment</div>
+          <div class="assessment-profile panel">
+            <div class="assessment-profile-body">
+              <div class="profile-col details">
+                <table class="result-details">
+                  <tr><td><strong>Surname:</strong></td><td>Mutabvuri</td></tr>
+                  <tr><td><strong>Name:</strong></td><td>Keith</td></tr>
+                  <tr><td><strong>Gender:</strong></td><td>Male</td></tr>
+                  <tr><td><strong>National ID#:</strong></td><td>58-2029825N66</td></tr>
+                  <tr><td><strong>Date Of Birth:</strong></td><td>2006-1-9</td></tr>
+                  <tr><td><strong>Place Of Birth</strong>:</td><td>Kwekwe</td></tr>
+                  <tr><td><strong>Programme</strong>:</td><td>Bachelor of Science Honours Degree in Computer Science</td></tr>
+                </table>
+              </div>
+
+              <div class="profile-col address">
+                <div class="address-title">Address and Contact Details</div>
+                <div>Victoria Range</div>
+                <div>Masvingo</div>
+                <div>Zimbabwe</div>
+                <div style="margin-top:8px"><strong>Telephone</strong> :263772817794</div>
+              </div>
+
+              <div class="profile-col idcrest">
+                <div class="student-id">N02530153A</div>
+                <img src="logo_nust_png.png" alt="Student crest" class="detail-logo" />
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-body">
+            <div class="assessment-table-wrap">
+              <table class="assessment-table enhance-table">
+                <thead>
+                  <tr>
+                    <th>Academic Year</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Mark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>2025</td><td>SCS1101</td><td>Introduction to Computer Science and Programming</td><td>Overall Assessment</td><td>Contributing</td><td>72.00</td></tr>
+                  <tr><td>2025</td><td>SCS1101</td><td>Introduction to Computer Science and Programming</td><td>Overall</td><td>Aggregating</td><td>72.00</td></tr>
+                  <tr><td>2025</td><td>SCS1103</td><td>Operating Systems Concepts</td><td>Overall Assessment</td><td>Contributing</td><td>75.00</td></tr>
+                  <tr><td>2025</td><td>SCS1103</td><td>Operating Systems Concepts</td><td>Overall</td><td>Aggregating</td><td>75.00</td></tr>
+                  <tr><td>2025</td><td>SCS1111</td><td>Principles of Programming Languages</td><td>Overall Assessment</td><td>Contributing</td><td>92.00</td></tr>
+                  <tr><td>2025</td><td>SCS1111</td><td>Principles of Programming Languages</td><td>Overall</td><td>Aggregating</td><td>92.00</td></tr>
+                  <tr><td>2025</td><td>SCS1112</td><td>Fundamentals of Digital Electronics</td><td>Overall Assessment</td><td>Contributing</td><td>79.00</td></tr>
+                  <tr><td>2025</td><td>SCS1112</td><td>Fundamentals of Digital Electronics</td><td>Overall</td><td>Aggregating</td><td>79.00</td></tr>
+                  <tr><td>2025</td><td>SCS1210</td><td>Discrete Mathematics</td><td>Overall Assessment</td><td>Contributing</td><td>83.00</td></tr>
+                  <tr><td>2025</td><td>SCS1210</td><td>Discrete Mathematics</td><td>Overall</td><td>Aggregating</td><td>83.00</td></tr>
+                  <tr><td>2025</td><td>SCS1213</td><td>Database Systems</td><td>Overall Assessment</td><td>Contributing</td><td>86.00</td></tr>
+                  <tr><td>2025</td><td>SCS1213</td><td>Database Systems</td><td>Overall</td><td>Aggregating</td><td>86.00</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="export-wrap"><button class="export-btn" data-target="#assessment">Export as PDF</button></div>
+          </div>
+        </section>
+
+        <footer class="footer-bar">© 2026 GROUP PROJECT: "Think In Other Terms"</footer>
+      </main>
+    </div>
+  </section>
+
+  <script>
+    // load jsPDF dynamically for client-side PDF export if available
+    (function loadJsPDF(){
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      s.defer = true;
+      document.head.appendChild(s);
+    })();
+    const loginView = document.getElementById('loginView');
+    const dashboardView = document.getElementById('dashboardView');
+
+    const dashboardHome = document.getElementById('dashboardHome');
+    const paymentsSection = document.getElementById('payments');
+    const resultsSection = document.getElementById('results');
+    const assessmentSection = document.getElementById('assessment');
+    const menuToggle = document.getElementById('menuToggle');
+
+    // Sidebar collapse toggle
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-collapsed');
+      });
+    }
+
+    function showSection(id) {
+      if (!dashboardHome || !paymentsSection || !resultsSection) return;
+      // hide all dashboard sub-views
+      dashboardHome.classList.add('is-hidden');
+      paymentsSection.classList.add('is-hidden');
+      resultsSection.classList.add('is-hidden');
+
+      if (id === 'payments') paymentsSection.classList.remove('is-hidden');
+      else if (id === 'results') resultsSection.classList.remove('is-hidden');
+      else if (id === 'assessment') assessmentSection.classList.remove('is-hidden');
+      else dashboardHome.classList.remove('is-hidden');
+
+      // update active link
+      document.querySelectorAll('.side-link').forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.side-link[href="#${id === 'dashboardHome' ? 'dashboard' : id}"]`);
+      if (link) link.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const student = document.getElementById('student').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (student === 'N02530153A' && password === 'nust1234') {
+        loginView.classList.add('is-hidden');
+        dashboardView.classList.remove('is-hidden');
+        // show home dashboard by default
+        showSection('dashboardHome');
+        // attach sidebar link handlers
+        document.querySelectorAll('.side-link').forEach(a => {
+          a.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            const href = (this.getAttribute('href') || '').replace('#','');
+            if (href === 'payments') showSection('payments');
+            else if (href === 'results') showSection('results');
+            else if (href === 'assessment') showSection('assessment');
+            else showSection('dashboardHome');
+          });
+        });
+        // enhance tables (search + pagination)
+        enhanceAllTables();
+        // wire export buttons
+        document.querySelectorAll('.export-btn').forEach(b => {
+          b.addEventListener('click', async () => {
+            exportSectionToPdf(b.dataset.target || '.dashboard');
+          });
+        });
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        return;
+      }
+
+      alert('Invalid student number or password!!! Use the demo credentials in this mockup.');
+    }
+
+    function showLogin() {
+      dashboardView.classList.add('is-hidden');
+      loginView.classList.remove('is-hidden');
+      // reset to home view
+      if (paymentsSection) paymentsSection.classList.add('is-hidden');
+      if (dashboardHome) dashboardHome.classList.remove('is-hidden');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function exportSectionToPdf(targetSelector) {
+      const target = document.querySelector(targetSelector);
+      if (!target) return window.print();
+
+      const clone = target.cloneNode(true);
+      clone.querySelectorAll('.table-controls, .table-nav').forEach(node => node.remove());
+      clone.style.background = '#ffffff';
+      clone.style.color = '#000000';
+      clone.querySelectorAll('*').forEach(el => {
+        el.style.color = '#000000';
+      });
+
+      if (window.jspdf && window.jspdf.jsPDF) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'landscape' });
+        doc.html(clone, {
+          x: 24,
+          y: 24,
+          html2canvas: { scale: 0.7, backgroundColor: '#ffffff' },
+          callback: function () {
+            doc.save('export.pdf');
+          }
+        });
+        return;
+      }
+
+      window.print();
+    }
+
+    // Generic table enhancer: adds search and simple pagination
+    function enhanceAllTables() {
+      document.querySelectorAll('table.enhance-table').forEach(table => {
+        if (table.dataset.enhanced) return;
+        table.dataset.enhanced = '1';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-controls';
+        const search = document.createElement('input');
+        search.type = 'search';
+        search.placeholder = 'Search table...';
+        search.className = 'table-search';
+        wrapper.appendChild(search);
+
+        const filterField = document.createElement('select');
+        filterField.className = 'table-filter-field';
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = 'All columns';
+        filterField.appendChild(allOption);
+        Array.from(table.tHead.rows[0].cells).forEach((cell, index) => {
+          const option = document.createElement('option');
+          option.value = String(index);
+          option.textContent = cell.textContent.trim();
+          filterField.appendChild(option);
+        });
+        wrapper.appendChild(filterField);
+
+        const pageSizeSelect = document.createElement('select');
+        [10,25,50,100].forEach(n => { const o = document.createElement('option'); o.value = n; o.text = n; pageSizeSelect.appendChild(o); });
+        pageSizeSelect.value = 10;
+        pageSizeSelect.className = 'table-pagesize';
+        wrapper.appendChild(pageSizeSelect);
+
+        table.parentNode.insertBefore(wrapper, table);
+
+        const rows = Array.from(table.tBodies[0].rows);
+        let page = 1;
+        let sortColumn = -1;
+        let sortDirection = 1;
+        function render() {
+          const q = search.value.trim().toLowerCase();
+          const pageSize = parseInt(pageSizeSelect.value,10);
+          const selectedField = filterField.value;
+          const filtered = rows.filter(r => {
+            if (!q) return true;
+            const cells = Array.from(r.cells);
+            if (selectedField === 'all') return r.innerText.toLowerCase().includes(q);
+            const cell = cells[parseInt(selectedField, 10)];
+            return (cell ? cell.innerText : '').toLowerCase().includes(q);
+          }).sort((a, b) => {
+            if (sortColumn < 0) return 0;
+            const av = (a.cells[sortColumn]?.innerText || '').trim();
+            const bv = (b.cells[sortColumn]?.innerText || '').trim();
+            const an = parseFloat(av.replace(/[^0-9.-]/g, ''));
+            const bn = parseFloat(bv.replace(/[^0-9.-]/g, ''));
+            const numeric = !Number.isNaN(an) && !Number.isNaN(bn);
+            if (numeric) return (an - bn) * sortDirection;
+            return av.localeCompare(bv) * sortDirection;
+          });
+          const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+          if (page > totalPages) page = totalPages;
+          rows.forEach(r => r.style.display = 'none');
+          const start = (page-1)*pageSize;
+          filtered.slice(start, start+pageSize).forEach(r => r.style.display = 'table-row');
+
+          // render pager
+          let pager = wrapper.querySelector('.table-pager');
+          if (!pager) { pager = document.createElement('div'); pager.className='table-pager'; wrapper.appendChild(pager); }
+          pager.innerHTML = `Page ${page} of ${totalPages}`;
+        }
+
+        search.addEventListener('input', () => { page = 1; render(); });
+        filterField.addEventListener('change', () => { page = 1; render(); });
+        pageSizeSelect.addEventListener('change', () => { page = 1; render(); });
+        // allow arrow navigation
+        wrapper.addEventListener('click', (e) => {
+          if (e.target.classList.contains('page-prev')) { page = Math.max(1, page-1); render(); }
+          if (e.target.classList.contains('page-next')) { page = page+1; render(); }
+        });
+
+        // add next/prev buttons
+        const nav = document.createElement('div'); nav.className='table-nav';
+        nav.innerHTML = '<button class="page-prev">Prev</button> <button class="page-next">Next</button>';
+        wrapper.appendChild(nav);
+
+        Array.from(table.tHead.rows[0].cells).forEach((cell, index) => {
+          cell.classList.add('sortable-col');
+          cell.addEventListener('click', () => {
+            if (sortColumn === index) sortDirection *= -1;
+            else { sortColumn = index; sortDirection = 1; }
+            render();
+          });
+        });
+
+        render();
+      });
+    }
+  </script>
 </body>
-
 </html>
