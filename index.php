@@ -58,7 +58,7 @@
       <aside class="sidebar">
         <div class="profile-card">
           <img src="logo_nust_png.png" alt="NUST crest" class="profile-logo" />
-          <div class="profile-name">Keith Mutabvuri</div>
+          <div class="profile-name">TAPIWA CHIGOME</div>
         </div>
 
         <nav class="side-nav" aria-label="Student navigation">
