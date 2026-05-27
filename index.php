@@ -457,7 +457,7 @@
       const student = document.getElementById('student').value.trim();
       const password = document.getElementById('password').value.trim();
 
-      if (student === 'N02530153A' && password === 'nust1234') {
+      if (student === 'N02529721P' && password === 'nust1234') {
         loginView.classList.add('is-hidden');
         dashboardView.classList.remove('is-hidden');
         // show home dashboard by default
