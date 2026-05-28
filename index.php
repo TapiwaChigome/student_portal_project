@@ -67,9 +67,9 @@
           <a class="side-link" href="#payments">Payments History</a>
           <a class="side-link" href="#results">Examinations Results</a>
           <a class="side-link" href="#assessment">Continuous Assessment</a>
-          <a class="side-link" href="#timetable">Exams Timetable</a>
-          <a class="side-link" href="#elearning">NUST E-Learning</a>
-          <a class="side-link" href="#website">Main Website</a>
+          <a class="side-link" href="https://www.nust.ac.zw/" target="_blank" rel="noopener noreferrer">Exams Timetable</a>
+          <a class="side-link" href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer">NUST E-Learning</a>
+          <a class="side-link" href="https://www.nust.ac.zw/" target="_blank" rel="noopener noreferrer">Main Website</a>
         </nav>
       </aside>
 
@@ -81,22 +81,22 @@
             <h2>GET FEES QUOTE</h2>
             <p>Get your fees invoice.</p>
           </article>
-          <article class="action-card blue">
+          <article class="action-card blue" data-action="ecocash">
             <div class="action-icon icon-pay" aria-hidden="true"></div>
             <h2>PAY TUITION FEES</h2>
             <p>Pay instantly with Ecocash.</p>
           </article>
-          <article class="action-card red">
+          <article class="action-card red" data-action="bank">
             <div class="action-icon icon-online" aria-hidden="true"></div>
             <h2>PAY ONLINE</h2>
             <p>Secure Payments With FBC</p>
           </article>
-          <article class="action-card orange">
+          <article class="action-card orange" data-action="enquiry">
             <div class="action-icon icon-enquiry" aria-hidden="true"></div>
             <h2>ENQUIRIES</h2>
             <p>We are here to serve you</p>
           </article>
-          <article class="action-card teal">
+          <article class="action-card teal" data-action="calendar">
             <div class="action-icon icon-calendar" aria-hidden="true"></div>
             <h2>NUST CALENDAR APP</h2>
             <p>Download Android APK</p>
@@ -172,9 +172,9 @@
         </section>
 
         <section class="utility-strip">
-          <div class="utility-card"><span>Students Webmail</span></div>
-          <div class="utility-card"><span>Google Classroom</span></div>
-          <div class="utility-card"><span>E-Resources</span></div>
+          <a class="utility-card" href="https://mail.google.com/" target="_blank" rel="noopener noreferrer"><span>Students Webmail</span></a>
+          <a class="utility-card" href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"><span>Google Classroom</span></a>
+          <a class="utility-card" href="https://www.nust.ac.zw/" target="_blank" rel="noopener noreferrer"><span>E-Resources</span></a>
         </section>
 
         <section class="info-grid">
@@ -408,6 +408,21 @@
     </div>
   </section>
 
+  <div id="actionModal" class="modal-backdrop is-hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="closeModalBtn" class="modal-close" type="button" aria-label="Close">×</button>
+      <h3 id="modalTitle">Payment & Enquiry</h3>
+      <p id="modalIntro" class="modal-intro"></p>
+      <form id="actionForm" class="modal-form" novalidate>
+        <div id="modalFields"></div>
+        <div class="modal-actions">
+          <button class="btn-secondary" type="button" id="cancelModalBtn">Cancel</button>
+          <button class="btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     // load jsPDF dynamically for client-side PDF export if available
     (function loadJsPDF(){
@@ -424,6 +439,86 @@
     const resultsSection = document.getElementById('results');
     const assessmentSection = document.getElementById('assessment');
     const menuToggle = document.getElementById('menuToggle');
+    const actionModal = document.getElementById('actionModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalIntro = document.getElementById('modalIntro');
+    const modalFields = document.getElementById('modalFields');
+    const actionForm = document.getElementById('actionForm');
+    const actionConfigs = {
+      ecocash: {
+        title: 'Pay Tuition Fees with EcoCash',
+        intro: 'Enter your Econet mobile number and amount. We validate the number format before submission.',
+        fields: [
+          { name: 'phone', label: 'Econet Number', type: 'text', placeholder: '+263781234567', required: true },
+          { name: 'amount', label: 'Amount (USD)', type: 'number', min: '1', step: '0.01', placeholder: '250', required: true }
+        ],
+        submit: (values) => {
+          const phone = values.phone.trim();
+          const amount = values.amount.trim();
+          const phonePattern = /^\+263(78\d{7}|772\d{6})$/;
+          if (!phonePattern.test(phone)) {
+            return { ok: false, message: 'Please enter a valid Econet number starting with +26378 or +263772.' };
+          }
+          if (!amount || Number(amount) <= 0) {
+            return { ok: false, message: 'Enter a valid amount greater than zero.' };
+          }
+          return { ok: true, message: `EcoCash payment request sent for ${phone} for USD ${Number(amount).toFixed(2)}. Please complete the prompt on your phone.` };
+        }
+      },
+      bank: {
+        title: 'Pay Online with Bank Details',
+        intro: 'Enter your bank details to continue with your secure online payment.',
+        fields: [
+          { name: 'bankName', label: 'Bank Name', type: 'text', placeholder: 'FBC Bank', required: true },
+          { name: 'accountNumber', label: 'Bank Account Number', type: 'text', placeholder: '1234567890', required: true },
+          { name: 'branch', label: 'Branch', type: 'text', placeholder: 'Harare', required: true },
+          { name: 'amount', label: 'Amount (USD)', type: 'number', min: '1', step: '0.01', placeholder: '500', required: true }
+        ],
+        submit: (values) => {
+          const accountNumber = values.accountNumber.trim();
+          const amount = values.amount.trim();
+          if (!/^\d{6,}$/.test(accountNumber)) {
+            return { ok: false, message: 'Bank account number must contain at least 6 digits.' };
+          }
+          if (!amount || Number(amount) <= 0) {
+            return { ok: false, message: 'Enter a valid amount greater than zero.' };
+          }
+          return { ok: true, message: `Bank payment request created for ${values.bankName.trim()} account ${accountNumber}. Please confirm the amount of USD ${Number(amount).toFixed(2)}.` };
+        }
+      },
+      enquiry: {
+        title: 'Send an Enquiry',
+        intro: 'Share your student details and message. We will review your enquiry and reply to your university email.',
+        fields: [
+          { name: 'studentNumber', label: 'Student Number', type: 'text', placeholder: 'N02530153A', required: true },
+          { name: 'studentEmail', label: 'Student Email', type: 'email', placeholder: 'student@nust.ac.zw', required: true },
+          { name: 'message', label: 'Message', type: 'textarea', placeholder: 'Write your query here...', required: true }
+        ],
+        submit: (values) => {
+          const studentNumber = values.studentNumber.trim().toUpperCase();
+          const studentEmail = values.studentEmail.trim();
+          const message = values.message.trim();
+          const studentPattern = /^N\d{8}[A-Z]$/;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!studentPattern.test(studentNumber)) {
+            return { ok: false, message: 'Student number must look like N02530153A.' };
+          }
+          if (!emailPattern.test(studentEmail)) {
+            return { ok: false, message: 'Enter a valid university email address.' };
+          }
+          if (message.length < 10) {
+            return { ok: false, message: 'Please write at least 10 characters in your message.' };
+          }
+          return { ok: true, message: `Enquiry received from ${studentNumber} (${studentEmail}). Your message has been sent to the university support team.` };
+        }
+      },
+      calendar: {
+        title: 'NUST Calendar App',
+        intro: 'Use the link below to download the NUST Calendar App.',
+        fields: [],
+        submit: () => ({ ok: true, message: 'Download link ready.' })
+      }
+    };
 
     // Sidebar collapse toggle
     if (menuToggle) {
@@ -466,10 +561,15 @@
         document.querySelectorAll('.side-link').forEach(a => {
           a.addEventListener('click', function (ev) {
             ev.preventDefault();
-            const href = (this.getAttribute('href') || '').replace('#','');
-            if (href === 'payments') showSection('payments');
-            else if (href === 'results') showSection('results');
-            else if (href === 'assessment') showSection('assessment');
+            const href = this.getAttribute('href') || '';
+            if (/^https?:\/\//.test(href)) {
+              window.open(href, '_blank', 'noopener,noreferrer');
+              return;
+            }
+            const id = href.replace('#', '');
+            if (id === 'payments') showSection('payments');
+            else if (id === 'results') showSection('results');
+            else if (id === 'assessment') showSection('assessment');
             else showSection('dashboardHome');
           });
         });
@@ -496,6 +596,61 @@
       if (dashboardHome) dashboardHome.classList.remove('is-hidden');
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
+
+    function openActionModal(type) {
+      const config = actionConfigs[type];
+      if (!config) return;
+
+      modalTitle.textContent = config.title;
+      modalIntro.textContent = config.intro;
+      if (type === 'calendar') {
+        modalFields.innerHTML = '<div class="download-box"><a class="download-link" href="downloads/nust-calendar-app.apk" download>Download NUST Calendar App</a><p class="download-note">This download link is ready for the calendar app package.</p></div>';
+      } else {
+        modalFields.innerHTML = config.fields.map(field => {
+        if (field.type === 'textarea') {
+          return `<label class="modal-field"><span>${field.label}</span><textarea name="${field.name}" placeholder="${field.placeholder}" ${field.required ? 'required' : ''}></textarea></label>`;
+        }
+          return `<label class="modal-field"><span>${field.label}</span><input name="${field.name}" type="${field.type}" placeholder="${field.placeholder}" ${field.required ? 'required' : ''} ${field.min ? `min="${field.min}"` : ''} ${field.step ? `step="${field.step}"` : ''}></label>`;
+        }).join('');
+      }
+
+      actionForm.dataset.mode = type;
+      actionModal.classList.remove('is-hidden');
+      actionModal.setAttribute('aria-hidden', 'false');
+      actionForm.querySelector('input, textarea')?.focus();
+    }
+
+    function closeActionModal() {
+      actionModal.classList.add('is-hidden');
+      actionModal.setAttribute('aria-hidden', 'true');
+      actionForm.reset();
+    }
+
+    document.querySelectorAll('.action-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const type = card.dataset.action;
+        if (type) openActionModal(type);
+      });
+    });
+
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeActionModal);
+    document.getElementById('cancelModalBtn')?.addEventListener('click', closeActionModal);
+    actionModal?.addEventListener('click', (event) => {
+      if (event.target === actionModal) closeActionModal();
+    });
+    actionForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(actionForm).entries());
+      const type = actionForm.dataset.mode;
+      const config = actionConfigs[type];
+      if (!config) return;
+
+      const result = config.submit(data);
+      alert(result.message);
+      if (result.ok) {
+        closeActionModal();
+      }
+    });
 
     function exportSectionToPdf(targetSelector) {
       const target = document.querySelector(targetSelector);
